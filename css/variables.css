@@ -1,0 +1,75 @@
+/* Design tokens from Figma: Portfolio - Emil Ivanov */
+
+:root {
+    /* ---------- Colors ---------- */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-gray-300: #d9d9d9;
+
+    --color-background: var(--color-white);
+    --color-text: var(--color-black);
+    --color-border: var(--color-black);
+    --color-placeholder: var(--color-gray-300);
+
+    /* Hero image fade (transparent -> white) */
+    --gradient-hero-fade: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 80%,
+        rgba(255, 255, 255, 0.4) 90%,
+        var(--color-white) 100%
+    );
+
+    /* ---------- Typography ---------- */
+    --font-family: "DM Sans", sans-serif;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+
+    /* Display */
+    --display-size: 96px;
+    --display-weight: var(--font-weight-medium);
+    --display-line-height: 1;
+    --display-letter-spacing: -0.03em;
+
+    /* Heading / H1 (mobile hero title) */
+    --h1-size: 64px;
+    --h1-weight: var(--font-weight-medium);
+    --h1-line-height: 1.1;
+    --h1-letter-spacing: -0.02em;
+
+    /* Heading / H2 */
+    --h2-size: 48px;
+    --h2-weight: var(--font-weight-medium);
+    --h2-line-height: 1.15;
+    --h2-letter-spacing: -0.015em;
+
+    /* Heading / H3 (mobile logo) */
+    --h3-size: 32px;
+    --h3-weight: var(--font-weight-medium);
+    --h3-line-height: 1.2;
+    --h3-letter-spacing: -0.01em;
+
+    /* Heading / H4 */
+    --h4-size: 24px;
+    --h4-weight: var(--font-weight-medium);
+    --h4-line-height: 1.3;
+    --h4-letter-spacing: -0.005em;
+
+    /* Body / Default */
+    --body-size: 16px;
+    --body-weight: var(--font-weight-regular);
+    --body-line-height: 1.6;
+    --body-letter-spacing: 0;
+
+    /* Body / Small */
+    --small-size: 14px;
+    --small-weight: var(--font-weight-regular);
+    --small-line-height: 1.5;
+    --small-letter-spacing: 0;
+
+    /* Label / Button */
+    --label-size: 16px;
+    --label-weight: var(--font-weight-medium);
+    --label-line-height: 1;
+    --label-letter-spacing: 0;
+}

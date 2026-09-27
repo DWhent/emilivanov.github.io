@@ -1,0 +1,383 @@
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Keep section headings clear of the fixed header when jumping to them */
+    scroll-padding-top: 100px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    margin: 0;
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-family);
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
+    line-height: var(--body-line-height);
+    letter-spacing: var(--body-letter-spacing);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+p {
+    margin: 0;
+}
+
+h2 {
+    font-size: clamp(36px, 3.333vw, var(--h2-size));
+    font-weight: var(--h2-weight);
+    line-height: var(--h2-line-height);
+    letter-spacing: var(--h2-letter-spacing);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 1184px of content with 128px gutters at the 1440px design width */
+.container {
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(16px, 8.889vw, 128px);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+    height: 723px;
+    background: var(--gradient-hero-fade), url("../assets/images/space.jpg") center / cover no-repeat;
+}
+
+/* Fixed to the top: see-through over the hero, white once you scroll */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* White while it sits over the dark hero photo (not scrolled, menu closed) */
+.site-header:not(.is-scrolled):not(.is-open) {
+    color: var(--color-white);
+    --fill-color: var(--color-white);
+    --fill-text: var(--color-black);
+}
+
+.site-header:not(.is-scrolled):not(.is-open) .menu-button img {
+    filter: invert(1);
+}
+
+.site-header.is-scrolled {
+    background: var(--color-background);
+    border-bottom-color: var(--color-placeholder);
+}
+
+.header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding-top: 21px;
+    transition: padding 0.3s;
+}
+
+.site-header.is-scrolled .header-inner {
+    padding-block: 8px;
+}
+
+.logo {
+    justify-self: start;
+    padding: 10px;
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+    line-height: var(--h4-line-height);
+    letter-spacing: var(--h4-letter-spacing);
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+}
+
+.nav-links a,
+.button,
+.site-footer p {
+    font-size: var(--label-size);
+    font-weight: var(--label-weight);
+    line-height: var(--label-line-height);
+    letter-spacing: var(--label-letter-spacing);
+}
+
+/* Padding gives the hover fill room; negative margin keeps the links where they were */
+.nav-links a {
+    padding: 6px 8px;
+    margin: -6px -8px;
+}
+
+.hero-title {
+    padding-top: 185px;
+    color: var(--color-white);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    font-size: clamp(44px, 6.667vw, var(--display-size));
+    font-weight: var(--display-weight);
+    line-height: var(--display-line-height);
+    letter-spacing: var(--display-letter-spacing);
+}
+
+/* ---------- Sections ---------- */
+
+.section-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    max-width: 568px;
+}
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 130px;
+}
+
+.about-photo {
+    width: 100%;
+    aspect-ratio: 568 / 608;
+    object-fit: cover;
+    object-position: center 12%;
+    background: var(--color-placeholder);
+}
+
+.projects {
+    margin-top: 194px;
+}
+
+.contact {
+    margin-top: 453px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+}
+
+/* Black fills up from the bottom on hover (white over the hero photo) */
+.button,
+.nav-links a {
+    background: linear-gradient(var(--fill-color, var(--color-black)), var(--fill-color, var(--color-black))) no-repeat bottom / 100% 0% border-box;
+    transition: background-size 0.35s cubic-bezier(0.65, 0, 0.35, 1), color 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.button:hover,
+.button:focus-visible,
+.nav-links a:hover,
+.nav-links a:focus-visible {
+    background-size: 100% 100%;
+    color: var(--fill-text, var(--color-white));
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+    margin-top: 241px;
+    padding-bottom: 52px;
+}
+
+.footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 46px;
+    border-top: 1px solid var(--color-border);
+}
+
+/* ---------- Mobile menu ---------- */
+
+.menu-button,
+.menu-icon-close {
+    display: none;
+}
+
+/* ---------- Mobile (Figma: HomePage - Mobile, 402px) ---------- */
+
+@media (max-width: 800px) {
+    .container {
+        padding-inline: 24px;
+    }
+
+    .hero {
+        height: 769px;
+        /* Smaller, cropped JPEG for phones */
+        background-image: var(--gradient-hero-fade), url("../assets/images/space-mobile.jpg");
+    }
+
+    .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-top: 34px;
+    }
+
+    .site-header.is-scrolled .header-inner {
+        padding-block: 12px;
+    }
+
+    .logo {
+        position: relative;
+        z-index: 2;
+        padding: 0;
+        font-size: var(--h3-size);
+        font-weight: var(--h3-weight);
+        line-height: var(--h3-line-height);
+        letter-spacing: var(--h3-letter-spacing);
+    }
+
+    .logo-surname {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+        position: relative;
+        z-index: 2;
+        padding: 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+    }
+
+    .menu-button:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 4px;
+    }
+
+    .site-header.is-open .menu-icon-open {
+        display: none;
+    }
+
+    .site-header.is-open .menu-icon-close {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        flex-direction: column;
+        gap: 24px;
+        padding: 140px 24px 24px;
+        background: var(--color-background);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s, visibility 0.2s;
+    }
+
+    .site-header.is-open .nav-links {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links a {
+        font-size: var(--h2-size);
+        font-weight: var(--h2-weight);
+        line-height: var(--h2-line-height);
+        letter-spacing: var(--h2-letter-spacing);
+    }
+
+    .hero-title {
+        padding-top: 175px;
+        font-size: clamp(48px, 16vw, var(--h1-size));
+        line-height: var(--h1-line-height);
+        letter-spacing: var(--h1-letter-spacing);
+    }
+
+    .hero-title br {
+        display: none;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .about-photo {
+        aspect-ratio: 354 / 441;
+    }
+
+    .projects {
+        margin-top: 100px;
+    }
+
+    .contact {
+        margin-top: 161px;
+    }
+
+    .site-footer {
+        margin-top: 153px;
+        padding-bottom: 34px;
+    }
+
+    .footer-inner {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 19px;
+        padding-top: 18px;
+    }
+
+    .site-footer p {
+        font-size: var(--small-size);
+        font-weight: var(--small-weight);
+        line-height: var(--small-line-height);
+        letter-spacing: var(--small-letter-spacing);
+    }
+
+    .footer-inner p:first-child {
+        align-self: center;
+    }
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* ---------- Animations ---------- */
+
+/* Hidden until GSAP animates them in (see js/main.js) */
+@media (prefers-reduced-motion: no-preference) {
+    .js .site-header,
+    .js .hero-title,
+    .js [data-reveal] {
+        visibility: hidden;
+    }
+}
